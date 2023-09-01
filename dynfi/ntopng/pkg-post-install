@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if ! id "ntopng" >/dev/null 2>&1; then
+    pw useradd ntopng -s /sbin/nologin -d /nonexistent -c "ntopng user" -w no
+fi
+chown ntopng:ntopng ${PKG_PREFIX}/bin/ntopng-config
+chmod ugo+s ${PKG_PREFIX}/bin/ntopng-config
+chown -R ntopng:ntopng ${PKG_PREFIX}/etc/ntopng
+
+OLD_LIBLDAB=`ldd ${PKG_PREFIX}/bin/ntopng | grep libldap | sed 's/ =>.*//' | tr -d '\t'`
+ln -s ${PKG_PREFIX}/lib/libldap.so ${PKG_PREFIX}/lib/${OLD_LIBLDAB}
+OLD_LIBLBER=`ldd ${PKG_PREFIX}/bin/ntopng | grep liblber | sed 's/ =>.*//' | tr -d '\t'`
+ln -s ${PKG_PREFIX}/lib/liblber.so ${PKG_PREFIX}/lib/${OLD_LIBLBER}

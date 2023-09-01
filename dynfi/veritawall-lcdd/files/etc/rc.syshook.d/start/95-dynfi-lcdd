@@ -1,0 +1,14 @@
+#!/bin/sh
+
+smbios_product="$(kenv smbios.planar.product)"
+
+case "$smbios_product" in
+    Z745) ;;
+    *)
+        exit 0
+        ;;
+esac
+
+/usr/local/sbin/LCDd -c /usr/local/etc/LCDd.conf &
+sleep 2
+su -m nobody -c "daemon python3 /usr/local/bin/veritawall-lcdd.py"

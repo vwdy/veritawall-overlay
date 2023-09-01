@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# PROVIDE: veritawall_autoconf 
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="veritawall_autoconf"
+
+start_cmd="veritawall_autconf_start"
+stop_cmd="veritawall_autoconf_stop"
+
+veritawall_autconf_start()
+{
+    /usr/local/etc/rc.syshook.d/stop/5-veritawall-autoconf
+    sleep 1
+    /usr/local/etc/rc.syshook.d/start/95-veritawall-autoconf
+}
+
+veritawall_autconf_stop()
+{
+    /usr/local/etc/rc.syshook.d/stop/5-veritawall-autoconf
+}
+
+veritawall_autconf_restart()
+{
+    veritawall_autconf_start
+}
+
+veritawall_autconf_reload()
+{
+    veritawall_autconf_start
+}
+
+load_rc_config $name
+run_rc_command "$1"

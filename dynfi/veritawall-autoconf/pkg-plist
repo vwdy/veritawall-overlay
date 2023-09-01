@@ -1,0 +1,3 @@
+etc/rc.syshook.d/start/95-veritawall-autoconf
+etc/rc.syshook.d/stop/5-veritawall-autoconf
+etc/rc.d/veritawall-autoconf

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+smbios_product="$(kenv smbios.planar.product)"
+
+case "$smbios_product" in
+    Z745) ;;
+    *)
+        exit 0
+        ;;
+esac
+
+pkill -f /usr/local/sbin/LCDd
+pkill -f "python3 /usr/local/bin/veritawall-lcdd.py"

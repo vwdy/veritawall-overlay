@@ -1,0 +1,29 @@
+# $FreeBSD$
+
+PORTNAME=  	veritawall-lcdd
+PORTVERSION=	1
+PORTREVISION=	3
+CATEGORIES=	veritawall
+DISTFILES=
+
+MAINTAINER=	oshogbo@VeritaWall.com
+COMMENT=	VeritaWall lcdd
+
+LICENSE=	BSD2CLAUSE
+
+do-extract:
+
+do-build:
+
+do-install:
+	mkdir -p ${STAGEDIR}${PREFIX}/bin
+	mkdir -p ${STAGEDIR}${PREFIX}/etc
+	cp -Rvp ${FILESDIR}/script/* ${STAGEDIR}${PREFIX}/bin
+	cp -Rvp ${FILESDIR}/etc/* ${STAGEDIR}${PREFIX}/etc
+	chmod +x ${STAGEDIR}${PREFIX}/etc/rc.syshook.d/start/*
+	chmod +x ${STAGEDIR}${PREFIX}/etc/rc.syshook.d/stop/*
+	chmod +x ${STAGEDIR}${PREFIX}/etc/rc.d/*
+
+post-install:
+
+.include <bsd.port.mk>

@@ -1,0 +1,39 @@
+#!/bin/sh
+#
+# PROVIDE: lcdd_veritawall
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="lcdd_veritawall"
+
+lcdd_py="/usr/local/bin/veritawall-lcdd.py"
+
+start_cmd="lcdd_veritawall_start"
+stop_cmd="lcdd_veritawall_stop"
+
+lcdd_veritawall_start()
+{
+    /usr/local/etc/rc.syshook.d/stop/5-veritawall-lcdd
+    sleep 1
+    /usr/local/etc/rc.syshook.d/start/95-veritawall-lcdd
+}
+
+lcdd_veritawall_stop()
+{
+    /usr/local/etc/rc.syshook.d/stop/5-veritawall-lcdd
+}
+
+lcdd_veritawall_restart()
+{
+    lcdd_veritawall_start
+}
+
+lcdd_veritawall_reload()
+{
+    lcdd_veritawall_start
+}
+
+load_rc_config $name
+run_rc_command "$1"

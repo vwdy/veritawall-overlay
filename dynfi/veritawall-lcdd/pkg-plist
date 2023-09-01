@@ -1,0 +1,5 @@
+bin/veritawall-lcdd.py
+etc/LCDd.conf
+etc/rc.syshook.d/start/95-veritawall-lcdd
+etc/rc.syshook.d/stop/5-veritawall-lcdd
+etc/rc.d/veritawall-lcdd
